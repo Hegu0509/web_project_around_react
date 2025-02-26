@@ -39,14 +39,15 @@ class Api {
   addCard({ name, link }) {
     return this._makeRequest("/cards", "POST", { name, link });
   }
-  updateAvatar({ avatar }) {
+  updateAvatar(avatar) {
+    console.log(avatar);
     return this._makeRequest(`/users/me/avatar`, "PATCH", { avatar });
   }
   deleteCard(id) {
     return this._makeRequest(`/cards/${id}`, "DELETE");
   }
 
-  changeLikeCardStatus({ id, isLiked }) {
+  changeLikeCardStatus(id, isLiked) {
     return this._makeRequest(`/cards/likes/${id}`, isLiked ? "PUT" : "DELETE");
   }
 }

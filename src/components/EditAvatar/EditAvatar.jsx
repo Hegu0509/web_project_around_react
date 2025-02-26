@@ -6,14 +6,9 @@ export default function EditAvatar() {
   const avatarRef = useRef();
   const { handleUpdateAvatar } = React.useContext(CurrentUserContext);
 
-  const handleAvatarChange = () => {
-    avatarRef.current.value;
-  };
-
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    handleUpdateAvatar(avatarRef);
+    handleUpdateAvatar(avatarRef.current.value);
   };
 
   return (
@@ -21,7 +16,6 @@ export default function EditAvatar() {
       className="popup__form form"
       name="card-form"
       id="edit-avatar-form"
-      onChange={handleAvatarChange}
       noValidate
     >
       <fieldset className="form__fieldset">
