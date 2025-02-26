@@ -1,5 +1,19 @@
+import React from "react";
 import line from "../../images/input_line.png";
-export default function NewCard() {
+import { useRef } from "react";
+
+export default function NewCard({ onAddPlaceSubmit }) {
+  const titleRef = useRef();
+  const linkRef = useRef();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onAddPlaceSubmit({
+      name: titleRef.current.value,
+      link: linkRef.current.value,
+    });
+  };
+
   return (
     <form
       className="popup__form form"
@@ -18,6 +32,7 @@ export default function NewCard() {
             minLength="2"
             maxLength="30"
             required
+            ref={titleRef}
           />
 
           <img
@@ -36,6 +51,7 @@ export default function NewCard() {
             placeholder="Enlace de la imagen"
             className="form__input"
             required
+            ref={linkRef}
           />
 
           <img
@@ -46,7 +62,7 @@ export default function NewCard() {
           <span className="form__input-error inputLink-error"></span>
         </div>
 
-        <button type="submit" className="form__button">
+        <button type="submit" className="form__button" onClick={handleSubmit}>
           Crear
         </button>
       </fieldset>
