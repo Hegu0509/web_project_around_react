@@ -1,10 +1,27 @@
 import React from "react";
 import line from "../../images/input_line.png";
-import { useRef } from "react";
+import FormValidator from "../../utils/FormValidator";
+import { useRef, useEffect } from "react";
 
 export default function NewCard({ onAddPlaceSubmit }) {
   const titleRef = useRef();
   const linkRef = useRef();
+  const formRef = useRef();
+
+  const formConfig = {
+    formSelector: ".form",
+    inputSelector: ".form__input",
+    submitButtonSelector: ".form__button",
+    fieldsetSelector: ".form__fieldset",
+    inactiveButtonClass: "button_inactive",
+    inputErrorClass: "form__input_type_error",
+    errorClass: "form__input-error_active",
+  };
+
+  useEffect(() => {
+    const formValidator = new FormValidator(formConfig, formRef.current);
+    formValidator.enableValidation();
+  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -20,6 +37,7 @@ export default function NewCard({ onAddPlaceSubmit }) {
       name="card-form"
       id="new-card-form"
       noValidate
+      ref={formRef}
     >
       <fieldset className="form__fieldset">
         <div className="form__element">
